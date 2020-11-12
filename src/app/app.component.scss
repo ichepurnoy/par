@@ -1,0 +1,10 @@
+.list-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.list {
+    width: 50%;
+    padding: 1rem;
+}

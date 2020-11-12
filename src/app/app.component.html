@@ -1,7 +1,13 @@
 <button mat-raised-button color="primary">
     <i class="material-icons">add_circle</i> Add ToDo
 </button>
-<app-task-list></app-task-list>
-<app-task-list></app-task-list>
 
+<br>
+<br>
+<br>
+
+<div class="list-wrapper">
+    <app-todo-list class="list" [todos]="todos">Incomplete ToDos</app-todo-list>
+    <app-todo-list class="list" [todos]="todos">Completed ToDos</app-todo-list>
+</div>
 <router-outlet></router-outlet>
