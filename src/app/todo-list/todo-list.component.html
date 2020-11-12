@@ -1,0 +1,7 @@
+<h1>
+    <ng-content></ng-content>
+</h1>
+
+<div>
+    <app-todo-item *ngFor="let todo of todos" [data]="todo"></app-todo-item>
+</div>
