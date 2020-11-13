@@ -2,7 +2,22 @@
     margin: 1rem 0;
     display: block;
 
-    & ::ng-deep .mat-card-header-text {
-        margin: 0;
+    & ::ng-deep {
+        & .mat-card-header-text {
+            margin: 0;
+        }
+
+        & .mat-card-header .mat-card-title {
+            margin-bottom: 0;
+        }
+
+        & .mat-card-header {
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    .delete {
+        cursor: pointer;
     }
 }

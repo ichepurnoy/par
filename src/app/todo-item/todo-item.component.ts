@@ -12,4 +12,6 @@ export class TodoItemComponent implements OnInit {
     constructor() {}
 
     ngOnInit(): void {}
+
+    delete(data: ToDo): void {}
 }

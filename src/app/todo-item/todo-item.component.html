@@ -1,6 +1,7 @@
 <mat-card class="example-card">
     <mat-card-header>
         <mat-card-title>{{ data.title }}</mat-card-title>
+        <i class="material-icons delete" (click)="delete(data)">delete_forever</i>
     </mat-card-header>
     <mat-card-content>
         <p>{{ data.description }}</p>
