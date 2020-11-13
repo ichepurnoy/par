@@ -1,11 +1,10 @@
-<button mat-raised-button color="primary" (click)="openDialog()"><i class="material-icons">add_circle</i> Add ToDo</button>
-
-<br />
-<br />
-<br />
+<div class="header">
+    <button mat-raised-button color="primary" (click)="openDialog()"><i class="material-icons">add_circle</i> Add ToDo</button>
+</div>
 
 <div class="list-wrapper">
     <app-todo-list class="list" [todos]="getIncompleteTodos(todos)">Incomplete ToDos</app-todo-list>
     <app-todo-list class="list" [todos]="getCompletedTodos(todos)">Completed ToDos</app-todo-list>
 </div>
+
 <router-outlet></router-outlet>

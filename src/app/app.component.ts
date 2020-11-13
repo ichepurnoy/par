@@ -53,7 +53,9 @@ export class AppComponent implements OnInit {
 
         this.dialogRef.afterClosed().subscribe(result => {
             // console.log(`Dialog result:`,  result);
-            this.todos.unshift(result);
+            if (result) {
+                this.todos.unshift(result);
+            }
         });
     }
 }
