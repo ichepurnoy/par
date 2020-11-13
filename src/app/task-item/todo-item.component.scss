@@ -1,4 +1,8 @@
 :host {
     margin: 1rem 0;
     display: block;
+
+    & ::ng-deep .mat-card-header-text {
+        margin: 0;
+    }
 }
