@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToDo } from './app.model';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
 
 @Component({
     selector: 'app-root',
@@ -8,6 +10,9 @@ import { ToDo } from './app.model';
 })
 export class AppComponent implements OnInit {
     todos: ToDo[];
+    dialogRef: MatDialogRef<AddTodoFormComponent>;
+
+    constructor(public dialog: MatDialog) {}
 
     ngOnInit(): void {
         this.todos = [
@@ -39,6 +44,16 @@ export class AppComponent implements OnInit {
         ];
     }
 
-    getIncompleteTodos = todos => todos.filter(todo => !todo.completed);
-    getCompletedTodos = todos => todos.filter(todo => todo.completed);
+    getIncompleteTodos = (todos: ToDo[]): ToDo[] => todos.filter(todo => !todo.completed);
+
+    getCompletedTodos = (todos: ToDo[]): ToDo[] => todos.filter(todo => todo.completed);
+
+    openDialog(): void {
+        this.dialogRef = this.dialog.open(AddTodoFormComponent);
+
+        this.dialogRef.afterClosed().subscribe(result => {
+            // console.log(`Dialog result:`,  result);
+            this.todos.unshift(result);
+        });
+    }
 }

@@ -10,11 +10,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 import { TodoItemComponent } from './todo-item/todo-item.component';
+import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
 
 @NgModule({
-    declarations: [AppComponent, TodoListComponent, TodoItemComponent],
+    declarations: [AppComponent, TodoListComponent, TodoItemComponent, AddTodoFormComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -24,6 +27,8 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
+        MatDialogModule,
+        MatInputModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

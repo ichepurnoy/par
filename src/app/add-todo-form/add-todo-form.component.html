@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+    <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <br />
+    <mat-checkbox class="example-margin" formControlName="completed">Is ToDo completed?</mat-checkbox>
+    <br />
+    <br />
+    <button mat-raised-button color="primary" [disabled]="form.invalid" [mat-dialog-close]="form.value" (click)="addTodo()">
+        <i class="material-icons">add_circle</i> Add ToDo
+    </button>
+</form>
