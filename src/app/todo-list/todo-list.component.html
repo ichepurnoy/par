@@ -3,5 +3,5 @@
 </h1>
 
 <div>
-    <app-todo-item *ngFor="let todo of todos" [data]="todo" (delete)="delete(todo)"></app-todo-item>
+    <app-todo-item *ngFor="let todo of todos" [data]="todo" (delete)="delete(todo)" (update)="update(todo)"></app-todo-item>
 </div>

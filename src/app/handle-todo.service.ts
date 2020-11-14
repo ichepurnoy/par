@@ -25,7 +25,7 @@ export class HandleTodoService {
         const source = localTodos && localTodos.length ? localTodos$ : remoteTodos$;
         return source.pipe(
             map(response => {
-                console.log(response);
+                // console.log(response);
                 return response;
             }),
             tap(res => {
@@ -40,11 +40,16 @@ export class HandleTodoService {
         localStorage.setItem('todos', JSON.stringify([todo, ...JSON.parse(localStorage.getItem('todos'))]));
     }
 
-    deleteTodo(todo): void {
-        console.log('DELETE ', todo);
+    /* Since logic for Delete and Update only differs in 'slice()',  this unified method was created */
+    updateOrDeleteTodo(todo, type: 'update' | 'delete'): void {
         const localTodos = this.getLocalTodos();
-        const indexToDelete = localTodos.findIndex(item => item.id === todo.id);
-        localTodos.splice(indexToDelete, 1);
+        const index = localTodos.findIndex(item => item.id === todo.id);
+        if (type === 'update') {
+            localTodos.splice(index, 1, todo);
+        }
+        if (type === 'delete') {
+            localTodos.splice(index, 1);
+        }
         this.setLocalTodos(localTodos);
     }
 }

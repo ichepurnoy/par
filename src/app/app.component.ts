@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
         this.dialogRef = this.dialog.open(AddTodoFormComponent);
 
         this.dialogRef.afterClosed().subscribe(todo => {
-            // console.log(`Dialog result:`,  result);
             if (todo) {
                 this.addTodo(todo);
             }
@@ -39,8 +38,13 @@ export class AppComponent implements OnInit {
         this.reloadTodos();
     }
 
-    public deleteTodo(todo: ToDo): void {
-        this.handleTodos.deleteTodo(todo);
+    deleteTodo(todo: ToDo): void {
+        this.handleTodos.updateOrDeleteTodo(todo, 'delete');
+        this.reloadTodos();
+    }
+
+    updateTodo(todo: ToDo): void {
+        this.handleTodos.updateOrDeleteTodo({ ...todo, completed: !todo.completed }, 'update');
         this.reloadTodos();
     }
 

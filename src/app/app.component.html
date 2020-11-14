@@ -3,8 +3,12 @@
 </div>
 
 <div class="list-wrapper">
-    <app-todo-list class="list" [todos]="incompleteTodos$ | async" [delete]="deleteTodo.bind(this)">Incomplete ToDos</app-todo-list>
-    <app-todo-list class="list" [todos]="completedTodos$ | async" [delete]="deleteTodo.bind(this)">Completed ToDos</app-todo-list>
+    <app-todo-list class="list" [todos]="incompleteTodos$ | async" [delete]="deleteTodo.bind(this)" [update]="updateTodo.bind(this)"
+        >Incomplete ToDos</app-todo-list
+    >
+    <app-todo-list class="list" [todos]="completedTodos$ | async" [delete]="deleteTodo.bind(this)" [update]="updateTodo.bind(this)"
+        >Completed ToDos</app-todo-list
+    >
 </div>
 
 <router-outlet></router-outlet>

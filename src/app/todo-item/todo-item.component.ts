@@ -9,6 +9,7 @@ import { ToDo } from '../app.model';
 export class TodoItemComponent implements OnInit {
     @Input() data: ToDo;
     @Output() delete: EventEmitter<ToDo> = new EventEmitter<ToDo>();
+    @Output() update: EventEmitter<ToDo> = new EventEmitter<ToDo>();
 
     constructor() {}
 
@@ -16,5 +17,9 @@ export class TodoItemComponent implements OnInit {
 
     deleteTodo(todo: ToDo): void {
         this.delete.emit(todo);
+    }
+
+    updateTodo(todo: ToDo): void {
+        this.update.emit(todo);
     }
 }

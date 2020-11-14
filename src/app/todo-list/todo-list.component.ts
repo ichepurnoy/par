@@ -9,6 +9,7 @@ import { ToDo } from '../app.model';
 export class TodoListComponent implements OnInit {
     @Input() todos: ToDo[] = [];
     @Input() delete: (todo: ToDo) => {};
+    @Input() update: (todo: ToDo) => {};
 
     constructor() {}
 
