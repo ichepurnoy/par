@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ToDo } from './app.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
+import { HandleTodoService } from './handle-todo.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -9,67 +12,41 @@ import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-    todos: ToDo[];
+    todos$: Observable<ToDo[]>;
+    incompleteTodos$: Observable<ToDo[]>;
+    completedTodos$: Observable<ToDo[]>;
     dialogRef: MatDialogRef<AddTodoFormComponent>;
 
-    constructor(public dialog: MatDialog) {}
+    constructor(private dialog: MatDialog, private handleTodos: HandleTodoService) {}
 
     ngOnInit(): void {
-        this.todos = [
-            {
-                id: 'asfasaf112121212',
-                title: 'Title 1',
-                description: 'descr 1',
-                completed: false,
-            },
-            {
-                id: 'dasads12w111212e',
-                title: 'Title 2',
-                description: 'descr 2',
-                completed: true,
-            },
-            {
-                id: '4545455fffsfsfsf4',
-                title: 'Title 3',
-                description: 'descr 3',
-                completed: false,
-            },
-            {
-                id: 'gbfhe6e4w54wg4g44',
-                title: 'Title 4',
-                description: 'descr 4',
-                completed: false,
-            },
-            {
-                id: 'dfsag3443434t3y35',
-                title: 'Title 5',
-                description: 'descr 5',
-                completed: true,
-            },
-        ];
+        this.reloadTodos();
     }
-
-    getIncompleteTodos = (todos: ToDo[]): ToDo[] => todos.filter(todo => !todo.completed);
-
-    getCompletedTodos = (todos: ToDo[]): ToDo[] => todos.filter(todo => todo.completed);
 
     openDialog(): void {
         this.dialogRef = this.dialog.open(AddTodoFormComponent);
 
-        this.dialogRef.afterClosed().subscribe(result => {
+        this.dialogRef.afterClosed().subscribe(todo => {
             // console.log(`Dialog result:`,  result);
-            if (result) {
-                this.todos.unshift(result);
+            if (todo) {
+                this.addTodo(todo);
             }
         });
     }
 
     addTodo(todo): void {
-        this.todos.unshift(todo);
+        this.handleTodos.addTodo(todo);
+        this.reloadTodos();
     }
 
-    deleteTodo(todo): void {
-        const indexToDelete = this.todos.findIndex(item => item.id === todo.id);
-        this.todos = this.todos.splice(indexToDelete, 1);
+    public deleteTodo(todo: ToDo): void {
+        this.handleTodos.deleteTodo(todo);
+        this.reloadTodos();
+    }
+
+    reloadTodos(): void {
+        this.todos$ = this.handleTodos.getTodos();
+        this.incompleteTodos$ = this.todos$.pipe(map(todos => todos.filter(todo => !todo.completed)));
+        this.completedTodos$ = this.todos$.pipe(map(todos => todos.filter(todo => todo.completed)));
     }
 }

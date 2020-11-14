@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HandleTodoService } from '../handle-todo.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToDo } from '../app.model';
 
 @Component({
     selector: 'app-add-todo-form',
@@ -9,19 +12,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddTodoFormComponent implements OnInit {
     form: FormGroup;
 
-    constructor(private fb: FormBuilder) {}
+    constructor(private fb: FormBuilder, private handleTodos: HandleTodoService, @Inject(MAT_DIALOG_DATA) todo: ToDo) {}
 
     ngOnInit(): void {
         this.form = this.fb.group({
-            id: [{ value: 'svscsdsdvsas1e12etest', disabled: true }],
+            id: [this.getNewId()],
             title: ['', [Validators.required]],
             description: ['', [Validators.required]],
             completed: [false],
         });
     }
 
-    addTodo(): void {
-        // console.log(this.form.value);
-        // this.form.reset();
-    }
+    getNewId = (): number => new Date().getTime();
+
+    // addTodo(todo): void {
+    //     this.form.reset();
+    //     this.handleTodos.addTodo(todo);
+    // }
 }

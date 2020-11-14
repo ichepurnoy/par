@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,7 @@ import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
+        HttpClientModule,
         ReactiveFormsModule,
         MatButtonModule,
         MatCardModule,
