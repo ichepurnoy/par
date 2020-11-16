@@ -18,11 +18,15 @@ export class AddTodoFormComponent implements OnInit {
     ngOnInit(): void {
         this.form = this.fb.group({
             id: [this.getNewId()],
-            title: ['', [Validators.required]],
+            title: ['', [Validators.required, this.handleTodos.checkTitleUniqueness.bind(this.handleTodos)]],
             description: ['', [Validators.required]],
             completed: [false],
         });
     }
 
     getNewId = (): number => new Date().getTime();
+
+    isTitleValid(): any {
+        return this.form.controls.title.value.length && !this.form.controls.title.valid && this.form.controls.title.touched;
+    }
 }

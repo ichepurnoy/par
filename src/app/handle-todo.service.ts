@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { ToDo } from './app.model';
 import { HttpClient } from '@angular/common/http';
 import { map, shareReplay, tap } from 'rxjs/operators';
+import { AbstractControl } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
@@ -51,5 +52,14 @@ export class HandleTodoService {
             localTodos.splice(index, 1);
         }
         this.setLocalTodos(localTodos);
+    }
+
+    /* title validation for uniqueness */
+    checkTitleUniqueness(control: AbstractControl): { [key: string]: boolean } | null {
+        const localTodos = this.getLocalTodos();
+        if (!!localTodos.filter(todo => todo.title === control.value).length) {
+            return { title: true };
+        }
+        return null;
     }
 }

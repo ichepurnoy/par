@@ -2,6 +2,7 @@
     <mat-form-field appearance="fill" class="field">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title" />
+        <mat-error class="text-danger" *ngIf="isTitleValid()">Title should be unique.</mat-error>
     </mat-form-field>
 
     <div class="field hidden">ID: <input formControlName="id" /></div>
