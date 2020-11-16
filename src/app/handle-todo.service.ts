@@ -37,7 +37,7 @@ export class HandleTodoService {
     }
 
     addTodo(todo): void {
-        localStorage.setItem('todos', JSON.stringify([todo, ...JSON.parse(localStorage.getItem('todos'))]));
+        this.setLocalTodos([todo, ...JSON.parse(localStorage.getItem('todos'))]);
     }
 
     /* Since logic for Delete and Update only differs in 'slice()',  this unified method was created */

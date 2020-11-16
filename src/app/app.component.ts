@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ToDo } from './app.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
     todos$: Observable<ToDo[]>;
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
     completedTodos$: Observable<ToDo[]>;
     dialogRef: MatDialogRef<AddTodoFormComponent>;
 
-    constructor(private dialog: MatDialog, private handleTodos: HandleTodoService) {}
+    constructor(private dialog: MatDialog, private handleTodos: HandleTodoService, private cdr: ChangeDetectorRef) {}
 
     ngOnInit(): void {
         this.reloadTodos();
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
         this.dialogRef.afterClosed().subscribe(todo => {
             if (todo) {
                 this.addTodo(todo);
+                this.cdr.markForCheck();
             }
         });
     }
